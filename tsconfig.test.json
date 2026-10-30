@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": [
+    "src/tipos.ts",
+    "src/presets.ts",
+    "src/saliencia.ts",
+    "src/recorte.ts",
+    "src/zip.ts",
+    "src/ico.ts",
+    "src/i18n.ts",
+    "src/test/**/*.ts"
+  ]
+}

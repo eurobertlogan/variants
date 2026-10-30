@@ -1,0 +1,129 @@
+export type Idioma = "pt" | "en";
+
+export interface Textos {
+  marca: string;
+  tituloPagina: string;
+  titulo: string;
+  tituloAcento: string;
+  subtitulo: string;
+  selo: string;
+  soltar: string;
+  soltarToque: string;
+  soltarAtivo: string;
+  escolher: string;
+  formatos: string;
+  mostrarZona: string;
+  qualidade: string;
+  baixarTudo: string;
+  limpar: string;
+  baixar: string;
+  incluir: string;
+  trocar: string;
+  ajustar: string;
+  automatico: string;
+  selecionarTodos: string;
+  selecionarNenhum: string;
+  arraste: string;
+  comoFunciona: string;
+  explicacao: string;
+  vazio: string;
+  selecionados: (quantos: number) => string;
+  arquivos: (quantos: number) => string;
+  naoSuportado: string;
+  rodape: (ano: number) => string;
+  nomeArquivoZip: string;
+  indice: string;
+  fonte: string;
+  geradoEm: string;
+  zonaCoberta: string;
+  tamanhos: (quantos: number, primeiro: number, ultimo: number) => string;
+}
+
+export const TEXTOS: Record<Idioma, Textos> = {
+  pt: {
+    marca: "variants",
+    tituloPagina: "variants: uma foto, todos os recortes, sem upload",
+    titulo: "uma foto, todos os",
+    tituloAcento: "recortes",
+    subtitulo:
+      "Solte a imagem mestre e receba cada formato que a internet pede: feed, story, capa, miniatura, ícone. O recorte persegue o assunto e respeita a área que a interface da plataforma cobre.",
+    selo: "// nada é enviado para nenhum servidor",
+    soltar: "solte a imagem aqui",
+    soltarToque: "toque para escolher a imagem",
+    soltarAtivo: "pode soltar",
+    escolher: "escolher imagem",
+    formatos: "jpg · png · webp",
+    mostrarZona: "mostrar zona segura",
+    qualidade: "qualidade",
+    baixarTudo: "baixar tudo (.zip)",
+    limpar: "limpar",
+    baixar: "baixar",
+    incluir: "incluir",
+    trocar: "trocar imagem",
+    ajustar: "ajustar",
+    automatico: "automático",
+    selecionarTodos: "todos",
+    selecionarNenhum: "nenhum",
+    arraste: "arraste para reposicionar",
+    comoFunciona: "// como funciona",
+    explicacao:
+      "O recorte segue um mapa de interesse montado na hora: borda, tom de pele e saturação apontam onde está o assunto. A janela de cada plataforma é posicionada para manter o assunto inteiro e fora da faixa que o story, o TikTok e o YouTube cobrem com botão e legenda. Nada sobe para servidor: a conta toda roda na placa do seu aparelho.",
+    vazio: "nenhuma imagem carregada ainda.",
+    selecionados: (quantos) => `${quantos} formato(s) selecionado(s)`,
+    arquivos: (quantos) => `${quantos} arquivo(s)`,
+    naoSuportado: "Este navegador não abriu a imagem. Tente JPG, PNG ou WebP.",
+    rodape: (ano) => `${ano} · robertlogan.cc · o recorte roda no seu navegador`,
+    nomeArquivoZip: "variantes.zip",
+    indice: "Índice dos recortes",
+    fonte: "Imagem de origem",
+    geradoEm: "Gerado em",
+    zonaCoberta: "área coberta pela interface",
+    tamanhos: (quantos, primeiro, ultimo) => `${quantos} tamanhos, ${primeiro} a ${ultimo} px`,
+  },
+  en: {
+    marca: "variants",
+    tituloPagina: "variants: one photo, every crop, no upload",
+    titulo: "one photo, every",
+    tituloAcento: "crop",
+    subtitulo:
+      "Drop the master image and get every format the internet asks for: feed, story, cover, thumbnail, icon. The crop follows the subject and respects the area the platform interface covers.",
+    selo: "// nothing is uploaded anywhere",
+    soltar: "drop the image here",
+    soltarToque: "tap to choose the image",
+    soltarAtivo: "you can drop",
+    escolher: "choose image",
+    formatos: "jpg · png · webp",
+    mostrarZona: "show safe area",
+    qualidade: "quality",
+    baixarTudo: "download all (.zip)",
+    limpar: "clear",
+    baixar: "download",
+    incluir: "include",
+    trocar: "change image",
+    ajustar: "adjust",
+    automatico: "auto",
+    selecionarTodos: "all",
+    selecionarNenhum: "none",
+    arraste: "drag to reposition",
+    comoFunciona: "// how it works",
+    explicacao:
+      "The crop follows an interest map built on the spot: edges, skin tones and saturation point to where the subject is. Each platform window is placed to keep the subject whole and outside the band that stories, TikTok and YouTube cover with buttons and captions. Nothing leaves the machine: the whole thing runs on your device.",
+    vazio: "no image loaded yet.",
+    selecionados: (quantos) => `${quantos} format(s) selected`,
+    arquivos: (quantos) => `${quantos} file(s)`,
+    naoSuportado: "This browser could not open the image. Try JPG, PNG or WebP.",
+    rodape: (ano) => `${ano} · robertlogan.cc · the crop runs in your browser`,
+    nomeArquivoZip: "variants.zip",
+    indice: "Crop index",
+    fonte: "Source image",
+    geradoEm: "Generated at",
+    zonaCoberta: "area covered by the interface",
+    tamanhos: (quantos, primeiro, ultimo) => `${quantos} sizes, ${primeiro} to ${ultimo} px`,
+  },
+};
+
+export function idiomaInicial(preferido: string | null, salvo: string | null): Idioma {
+  const guardado = salvo === "pt" || salvo === "en" ? salvo : null;
+  if (guardado) return guardado;
+  return (preferido ?? "pt").toLowerCase().startsWith("pt") ? "pt" : "en";
+}

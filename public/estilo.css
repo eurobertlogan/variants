@@ -1,0 +1,650 @@
+/* Identidade robertlogan.cc: Geist, #0b0b0c, grade técnica, pistache. */
+
+@font-face {
+  font-family: "Geist";
+  src: url("./fontes/geist-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("./fontes/geist-latin-ext.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("./fontes/geist-mono-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --background: #0b0b0c;
+  --foreground: #f2efea;
+  --card: #111113;
+  --popover: #131315;
+  --secondary: #17171a;
+  --muted: #16161a;
+  --muted-foreground: #9c9991;
+  --border: rgba(242, 239, 234, 0.1);
+  --hairline: rgba(242, 239, 234, 0.075);
+  --input: rgba(242, 239, 234, 0.14);
+  --brand: #cdd67f;
+  --brand-ink: #14150b;
+  --brand-text: #cdd67f;
+  --destructive: #e06a62;
+  --grid-line: rgba(242, 239, 234, 0.05);
+  --radius: 0.5rem;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--background);
+  color: var(--foreground);
+  font: 400 16px/1.5 var(--font-sans);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 88px 88px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 0%, #000 10%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 75% at 50% 0%, #000 10%, transparent 78%);
+}
+
+header,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "ss01" on;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  line-height: 1.15;
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* ---------- topo ---------- */
+
+.topbar {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.5s, border-color 0.5s, backdrop-filter 0.5s;
+}
+
+.topbar.rolou {
+  border-bottom-color: var(--hairline);
+  background: color-mix(in oklab, var(--background) 70%, transparent);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.topo-interno {
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.marca {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.marca .barra {
+  color: var(--brand-text);
+}
+
+.idiomas {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+}
+
+.idiomas button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--muted-foreground);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transition: color 0.2s;
+}
+
+.idiomas button:hover {
+  color: var(--foreground);
+}
+
+.idiomas button[aria-pressed="true"] {
+  color: var(--brand-text);
+}
+
+/* ---------- herói ---------- */
+
+main {
+  padding-top: 7rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-top: 8rem;
+  }
+}
+
+.heroi {
+  display: grid;
+  gap: 1.25rem;
+  padding-bottom: 2.5rem;
+}
+
+.selo {
+  margin: 0;
+  color: var(--brand-text);
+}
+
+h1 {
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(2.4rem, 6.4vw, 5rem);
+  line-height: 0.98;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+h1 .acento {
+  color: var(--brand-text);
+}
+
+.sub {
+  margin: 0;
+  max-width: 58ch;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .sub {
+    font-size: 1rem;
+  }
+}
+
+/* ---------- zona ---------- */
+
+.zona {
+  display: grid;
+  place-items: center;
+  gap: 0;
+  padding: 3.25rem 1.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--card);
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, padding 0.2s;
+}
+
+.zona:hover {
+  border-color: var(--input);
+}
+
+.zona:focus-visible {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 1px var(--brand);
+}
+
+.zona.ativo {
+  border-color: var(--brand);
+  background: #14160f;
+}
+
+.zona.compacta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  gap: 1rem;
+}
+
+.zona.compacta .formatos,
+.zona.compacta .soltar {
+  margin: 0;
+}
+
+.zona.compacta .soltar {
+  display: none;
+}
+
+.zona.compacta .formatos {
+  order: 2;
+  margin: 0;
+}
+
+.formatos {
+  margin: 0 0 0.75rem;
+  color: var(--muted-foreground);
+  letter-spacing: 0.08em;
+}
+
+.soltar {
+  margin: 0 0 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.zona.compacta .soltar {
+  font-size: 0.9375rem;
+  color: var(--muted-foreground);
+  letter-spacing: 0;
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: calc(var(--radius) * 0.8);
+  background: transparent;
+  color: var(--muted-foreground);
+  padding: 0.7rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: border-color 0.2s, color 0.2s, transform 0.3s, background 0.2s;
+}
+
+.botao:hover:not(:disabled) {
+  border-color: var(--input);
+  color: var(--foreground);
+}
+
+.botao.principal {
+  border-color: var(--brand);
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+.botao.principal:hover:not(:disabled) {
+  border-color: #dfe5a8;
+  background: #dfe5a8;
+  transform: translateY(-2px);
+}
+
+.botao:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.botao.pequeno {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8125rem;
+}
+
+.botao.fraco {
+  border-color: transparent;
+  color: var(--muted-foreground);
+}
+
+.botao.fraco:hover {
+  border-color: transparent;
+  color: var(--foreground);
+}
+
+/* ---------- painel ---------- */
+
+.painel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+  margin-top: 1rem;
+  padding: 0.875rem 1.125rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+
+.opcao input[type="checkbox"] {
+  accent-color: var(--brand);
+  width: 15px;
+  height: 15px;
+}
+
+.opcao input[type="range"] {
+  width: 140px;
+  height: 24px;
+  accent-color: var(--brand);
+  background: transparent;
+}
+
+.opcao output {
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.selecao {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  color: var(--muted-foreground);
+}
+
+.selecao button {
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: transparent;
+  padding: 0.3rem 0.5rem;
+  color: var(--muted-foreground);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.selecao button:hover {
+  border-color: var(--input);
+}
+
+.selecao button:hover {
+  color: var(--foreground);
+}
+
+/* ---------- grade ---------- */
+
+.grade {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  margin-top: 1.5rem;
+}
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--card);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.cartao:hover {
+  border-color: var(--input);
+}
+
+.previa {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--muted);
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Caixa de tamanho fixo e imagem contida: nenhum formato estica o cartão. */
+.previa canvas {
+  position: absolute;
+  inset: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  object-fit: contain;
+  cursor: grab;
+  touch-action: none;
+}
+
+.previa canvas:active {
+  cursor: grabbing;
+}
+
+.cartao-topo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.875rem 0;
+}
+
+.cartao-topo h3 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.medida {
+  color: #b3b0a8;
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.nota {
+  margin: 0;
+  padding: 0 0.875rem;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.nota:empty {
+  display: none;
+}
+
+.manual {
+  margin: 0;
+  padding: 0 0.875rem;
+  color: var(--brand-text);
+  font-size: 0.64rem;
+}
+
+.cartao-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding: 0.75rem 0.875rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.incluir {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+
+.incluir input {
+  accent-color: var(--brand);
+  width: 14px;
+  height: 14px;
+}
+
+/* ---------- ações ---------- */
+
+.vazio {
+  margin: 2rem 0 0;
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.contador {
+  margin-right: auto;
+  color: var(--muted-foreground);
+}
+
+.aviso {
+  margin: 1.25rem 0 0;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--hairline);
+  border-left: 2px solid var(--brand);
+  border-radius: calc(var(--radius) * 0.8);
+  background: var(--card);
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+}
+
+.aviso.erro {
+  border-left-color: var(--destructive);
+  color: var(--destructive);
+}
+
+/* ---------- explicação ---------- */
+
+.explicacao {
+  display: grid;
+  gap: 0.625rem;
+  margin-top: 4rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.explicacao h2 {
+  margin: 0;
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+
+.explicacao p {
+  margin: 0;
+  max-width: 74ch;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+footer {
+  padding-block: 1.25rem 3rem;
+  border-top: 1px solid var(--hairline);
+  color: var(--muted-foreground);
+}
+
+/* ---------- mobile ---------- */
+
+@media (max-width: 640px) {
+  .idiomas button {
+    padding: 1rem 0.6rem;
+    margin: -1rem 0;
+  }
+
+  .botao {
+    min-height: 44px;
+  }
+
+  .zona.compacta {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .grade {
+    grid-template-columns: 1fr;
+  }
+
+  .selecao {
+    margin-left: 0;
+  }
+
+  .acoes .contador {
+    flex: 1 0 100%;
+    margin-right: 0;
+  }
+
+  .acoes .botao {
+    flex: 1 1 auto;
+  }
+}
